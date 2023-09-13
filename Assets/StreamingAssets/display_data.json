@@ -1,1 +1,1 @@
-{"NetworkDisplay":{"Port":"5052","BroadCastAddress":"192.168.15.255","MasterOrSlave":"Master","MasterExtraDelay":"0.2"},"VideoSettings":{"Filename":"c","Position":"5","VideoSize":["521551","633"],"Pivot":["0.5","0.5"],"DisplayQuantity":"4"}}
+{"NetworkDisplay":{"MasterOrSlave":"Master","MasterExtraDelay":"0","SerialPort":"COM4","Baudrate":0},"VideoSettings":{"Filename":"","Position":"1","VideoSize":["1920","1080"],"Pivot":["0.5","0.5"],"DisplayQuantity":"0"}}

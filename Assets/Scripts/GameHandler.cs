@@ -8,26 +8,27 @@ using UnityEngine.Video;
 public class GameHandler : MonoBehaviour
 {
 
-    private DisplaySetup displaySetup;
     public SetupUI setupUI;
     public VideoPlayer player;
-    
 
+    [SerializeField] private GameObject render;
+    
     private bool ativo = false;
     void Awake()
     {
-
-        setupUI.gameObject.SetActive(false);
         player.gameObject.SetActive(false);
+        render.SetActive(false);
+        setupUI.gameObject.SetActive(false);
 
         DisplaySetup loadedData = LoadFromJsonFile<DisplaySetup>("display_data.json");
-        Debug.Log(loadedData);
+
         if (loadedData == null)
         {
             setupUI.gameObject.SetActive(true);
         }
         else
         {
+            render.SetActive(true);
             player.gameObject.SetActive(true);
         }
 
@@ -50,7 +51,6 @@ public class GameHandler : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Arquivo não encontrado: " + path);
             return default(T);
         }
     }
@@ -61,6 +61,9 @@ public class GameHandler : MonoBehaviour
         {
             ativo = !ativo;
             setupUI.gameObject.SetActive(ativo);
+            render.SetActive(!ativo);
+            player.gameObject.SetActive(!ativo);
         }
     }
+
 }

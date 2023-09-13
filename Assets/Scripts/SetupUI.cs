@@ -12,8 +12,8 @@ public class SetupUI : MonoBehaviour
     public DisplaySetup displaySetup;
     public SetupUI setupUI;
 
-    public InputField port;
-    public InputField broadCastAddress;
+    public InputField serialPort;
+    public InputField baudRate;
     public Dropdown masterOrSlave;
     public InputField masterExtraDelay;
 
@@ -39,8 +39,9 @@ public class SetupUI : MonoBehaviour
     private void GetDataFromJson()
     {
         DisplaySetup loadedData = LoadFromJsonFile<DisplaySetup>("display_data.json");
-        port.text = loadedData.NetworkDisplay.Port;
-        broadCastAddress.text = loadedData.NetworkDisplay.BroadCastAddress;
+
+        serialPort.text = loadedData.NetworkDisplay.SerialPort;
+        baudRate.text = loadedData.NetworkDisplay.Baudrate.ToString();
         SetDropdownValueByName(masterOrSlave, loadedData.NetworkDisplay.MasterOrSlave);
         masterExtraDelay.text = loadedData.NetworkDisplay.MasterExtraDelay;
 

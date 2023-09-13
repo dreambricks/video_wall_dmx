@@ -5,11 +5,11 @@ public class ArduinoCommunicationSender : MonoBehaviour
 {
     public SerialPort serialPort;
     public string port;
-    public int boundrate;
+    public int baudrate;
 
     void Start()
     {
-        serialPort = new SerialPort(port, boundrate);
+        serialPort = new SerialPort(port, baudrate);
         serialPort.Open();
     }
 

@@ -12,7 +12,7 @@ public class ArduinoCommunicationReceiver : MonoBehaviour
     SerialPort serialPort;
     Thread receiverThread;
     public string port;
-    public int boundrate;
+    public int baudrate;
     public string dataReceived;
     public static LockFreeQueue<string> myQueue;
     public bool startReceiving = true;
@@ -21,7 +21,7 @@ public class ArduinoCommunicationReceiver : MonoBehaviour
 
     void Start()
     {
-        serialPort = new SerialPort(port, boundrate);
+        serialPort = new SerialPort(port, baudrate);
         serialPort.Open();
 
         myQueue = new LockFreeQueue<string>();

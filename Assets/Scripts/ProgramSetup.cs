@@ -9,9 +9,10 @@ public class ProgramSetup : MonoBehaviour
     public DisplaySetup displaySetup;
     public GameObject player;
     public SetupUI setupUI;
+    [SerializeField] private GameObject render;
 
-    public InputField port;
-    public InputField broadCastAddress;
+    public InputField serialPort;
+    public InputField baudRate;
     public Dropdown masterOrSlave;
     public InputField masterExtraDelay;
 
@@ -29,29 +30,30 @@ public class ProgramSetup : MonoBehaviour
         NetworkDisplay networkDisplay = new NetworkDisplay();
         VideoSettings videoSettings = new VideoSettings();
 
-        networkDisplay.Port = port.text;
-        networkDisplay.BroadCastAddress = broadCastAddress.text;
+        
+        networkDisplay.SerialPort = (serialPort.text == "") ? "COM4" : serialPort.text;
+        networkDisplay.Baudrate =  (baudRate.text == "") ? 9600 : int.Parse(baudRate.text);
         int selectedIndex = masterOrSlave.value;
         networkDisplay.MasterOrSlave = masterOrSlave.options[selectedIndex].text;
-        networkDisplay.MasterExtraDelay = masterExtraDelay.text;
+        networkDisplay.MasterExtraDelay = (masterExtraDelay.text == "") ? "0" : masterExtraDelay.text;
         displaySetup.NetworkDisplay= networkDisplay;
 
         videoSettings.Filename= fileName.text;
-        videoSettings.DisplayQuantity = displayQuantity.text;
+        videoSettings.DisplayQuantity = (displayQuantity.text == "") ? "0" :  displayQuantity.text;
         int positionIndex = position.value;
         videoSettings.Position = position.options[positionIndex].text;
         videoSettings.VideoSize = new string[2];
-        videoSettings.VideoSize[0] = videoSizeW.text;
-        videoSettings.VideoSize[1] = videoSizeH.text;
+        videoSettings.VideoSize[0] = (videoSizeW.text == "") ? "1080" : videoSizeW.text;
+        videoSettings.VideoSize[1] = (videoSizeH.text == "") ? "1920" : videoSizeH.text;
         videoSettings.Pivot = new string[2];
-        videoSettings.Pivot[0] = pivotX.text;
-        videoSettings.Pivot[1] = pivotY.text;
+        videoSettings.Pivot[0] = (pivotX.text == "") ? "0" : pivotX.text;
+        videoSettings.Pivot[1] = (pivotY.text == "") ? "0" : pivotY.text;
         displaySetup.VideoSettings= videoSettings;
 
         SaveToJsonFile(displaySetup, "display_data.json");
 
-
-        player.gameObject.SetActive(true);  
+        player.SetActive(true);
+        render.SetActive(true);
 
         setupUI.gameObject.SetActive(false);
     }

@@ -11,7 +11,7 @@ public class VideoManagerSender : MonoBehaviour
     public ArduinoCommunicationSender arduinoCommunicationSender;
    
 
-    void Start()
+    void OnEnable()
     {
         player = GetComponent<VideoPlayer>();
         DisplaySetup loadedData = SaveManager.LoadFromJsonFile<DisplaySetup>("display_data.json");
@@ -30,21 +30,14 @@ public class VideoManagerSender : MonoBehaviour
         
         if (player.isPlaying == false)
         {
-            //player.Play();
             StartCoroutine(PlayCoroutine());
         }
         
     }
     
     IEnumerator PlayCoroutine()
-    {
-        for(int i = 10; i > 0; i--)
-        {
-            // send numbers from 10 to 1 by UDP
-            
-            arduinoCommunicationSender.SendMessageToSlaves("1");
-            yield return new WaitForSeconds(0.01F);
-        }
+    {    
+        arduinoCommunicationSender.SendMessageToSlaves("1");
         // recommended 15ms to 30 ms
         float delay = masterDelay;
         yield return new WaitForSeconds(delay);
