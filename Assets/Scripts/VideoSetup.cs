@@ -23,7 +23,8 @@ public class VideoSetup : MonoBehaviour
         DisplaySetup loadedData = SaveManager.LoadFromJsonFile<DisplaySetup>("display_data.json");
         if (loadedData == null || loadedData.VideoSettings.Filename == "" || loadedData.VideoSettings.Filename == null)
         {
-            player.url = "C:\\Users\\julio\\Documents\\DB\\Unity\\video_wall\\Assets\\Video\\dgo.mp4";
+            string videoFile = Path.Combine(Application.streamingAssetsPath, "Video/default.mp4");
+            player.url = videoFile;
         }else
         {
             player.url = loadedData.VideoSettings.Filename;

@@ -7,8 +7,13 @@ public class ArduinoCommunicationSender : MonoBehaviour
     public string port;
     public int baudrate;
 
-    void Start()
+    void OnEnable()
     {
+        DisplaySetup setup = SaveManager.LoadFromJsonFile<DisplaySetup>("display_data.json");
+
+        port = setup.NetworkDisplay.SerialPort;
+        baudrate = setup.NetworkDisplay.Baudrate;
+
         serialPort = new SerialPort(port, baudrate);
         serialPort.Open();
     }
@@ -20,7 +25,8 @@ public class ArduinoCommunicationSender : MonoBehaviour
             try
             {
                 // Send a message to the Arduino
-                serialPort.WriteLine(message);
+                serialPort.Write(message);
+               
             }
             catch (System.Exception)
             {

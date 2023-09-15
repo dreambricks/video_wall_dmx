@@ -43,8 +43,6 @@ public class VideoManagerSender : MonoBehaviour
         yield return new WaitForSeconds(delay);
         Debug.Log("Master delay: " + delay);
         player.Play();
-
-        //yield WaitForSeconds(0);
     }
         
 }

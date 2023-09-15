@@ -13,14 +13,18 @@ public class ArduinoCommunicationReceiver : MonoBehaviour
     Thread receiverThread;
     public string port;
     public int baudrate;
-    public string dataReceived;
     public static LockFreeQueue<string> myQueue;
     public bool startReceiving = true;
     public bool printToConsole = false;
     public string data;
 
-    void Start()
+    void OnEnable()
     {
+        DisplaySetup setup = SaveManager.LoadFromJsonFile<DisplaySetup>("display_data.json");
+        
+        port = setup.NetworkDisplay.SerialPort;
+        baudrate = setup.NetworkDisplay.Baudrate;
+
         serialPort = new SerialPort(port, baudrate);
         serialPort.Open();
 
@@ -40,7 +44,7 @@ public class ArduinoCommunicationReceiver : MonoBehaviour
             {
                 try
                 {
-                    string dataReceived = serialPort.ReadLine();
+                    data = serialPort.ReadLine();
                     
                     myQueue.Enqueue(data);
 

@@ -11,6 +11,7 @@ public class VideoManagerReceiver : MonoBehaviour
     void Start()
     {
         player= GetComponent<VideoPlayer>();
+        player.isLooping = true;
     }
 
     // Update is called once per frame
@@ -29,6 +30,7 @@ public class VideoManagerReceiver : MonoBehaviour
             if (value == 1)
             {
                 arduinoCommunicationReceiver.GetLastestData();
+                player.time = 0;
                 player.Play();
             }
         }
