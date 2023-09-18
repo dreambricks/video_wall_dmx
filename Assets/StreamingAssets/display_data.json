@@ -1,1 +1,1 @@
-{"NetworkDisplay":{"MasterOrSlave":"Slave","MasterExtraDelay":"0","SerialPort":"COM23","Baudrate":9600},"VideoSettings":{"Filename":"","Position":"1","VideoSize":["1920","1080"],"Pivot":["0.5","0.5"],"DisplayQuantity":"0"}}
+{"NetworkDisplay":{"MasterOrSlave":"Master","MasterExtraDelay":"0","SerialPort":"COM23","Baudrate":115200},"VideoSettings":{"Filename":"","Position":"1","VideoSize":["1920","1080"],"Pivot":["0.5","0.5"],"DisplayQuantity":"0"}}

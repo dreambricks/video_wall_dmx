@@ -26,7 +26,7 @@ public class ArduinoCommunicationSender : MonoBehaviour
             {
                 // Send a message to the Arduino
                 serialPort.Write(message);
-               
+
             }
             catch (System.Exception)
             {
