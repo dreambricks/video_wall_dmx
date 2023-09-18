@@ -32,7 +32,7 @@ public class VideoManagerSender : MonoBehaviour
         isMessageSent = false;
         isPlaying = false;
 
-        //playStartTime = DateTime.Now;
+        Debug.Log("Master Delay: " + masterDelay);
         
     }
 
@@ -55,7 +55,7 @@ public class VideoManagerSender : MonoBehaviour
             Debug.Log("Enviou a mensagem: " + player.isPlaying);
         }
 
-        if ((DateTime.Now - timePassed).TotalSeconds > 5 && isMessageSent && !isPlaying )
+        if ((DateTime.Now - timePassed).TotalSeconds >= masterDelay && isMessageSent && !isPlaying )
         {
             player.Play();
             isMessageSent=false;
