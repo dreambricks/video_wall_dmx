@@ -8,7 +8,7 @@ public class VideoManagerReceiver : MonoBehaviour
     private VideoPlayer player;
     public ArduinoCommunicationReceiver arduinoCommunicationReceiver;
 
-    void Start()
+    void OnEnable()
     {
         player= GetComponent<VideoPlayer>();
         player.isLooping = true;

@@ -1,10 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System.IO.Ports;
 using Newtonsoft.Json;
 
 public class ProgramSetup : MonoBehaviour
 {
+
+    public ArduinoCommunicationReceiver arduinoCommunicationReceiver;
+    public ArduinoCommunicationSender arduinoCommunicationSender;
 
     public DisplaySetup displaySetup;
     public GameObject player;
@@ -50,12 +54,33 @@ public class ProgramSetup : MonoBehaviour
         videoSettings.Pivot[1] = (pivotY.text == "") ? "0" : pivotY.text;
         displaySetup.VideoSettings= videoSettings;
 
+        if (arduinoCommunicationReceiver.serialPort != null)
+        {
+            if (arduinoCommunicationReceiver.serialPort.IsOpen)
+            {
+                Debug.Log("Desabilitando Receiver");
+                arduinoCommunicationReceiver.serialPort.Close();
+            }
+        }
+
+        if (arduinoCommunicationSender.serialPort != null)
+        {
+            if (arduinoCommunicationSender.serialPort.IsOpen)
+            {
+                Debug.Log("Desabilitando Sender");
+                arduinoCommunicationSender.serialPort.Close();
+            }
+        }
+
+
         SaveToJsonFile(displaySetup, "display_data.json");
 
         player.SetActive(true);
         render.SetActive(true);
 
         setupUI.gameObject.SetActive(false);
+
+       
     }
 
 

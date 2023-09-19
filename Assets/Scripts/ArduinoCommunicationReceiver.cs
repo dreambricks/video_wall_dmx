@@ -1,15 +1,12 @@
 using UnityEngine;
 using System.IO.Ports;
 using System.Threading;
-using System.Net.Sockets;
-using System.Net;
-using System.Text;
 using System;
-using UnityEditor.PackageManager;
+
 
 public class ArduinoCommunicationReceiver : MonoBehaviour
 {
-    SerialPort serialPort;
+    public SerialPort serialPort;
     Thread receiverThread;
     public string port;
     public int baudrate;

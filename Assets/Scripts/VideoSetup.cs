@@ -37,11 +37,15 @@ public class VideoSetup : MonoBehaviour
         if (masterOrSlave == "Slave")
         {
             videoManagerSender.enabled = false;
+            arduinoCommunicationSender.gameObject.SetActive(false);
+            videoManagerReceiver.enabled = true;
             arduinoCommunicationReceiver.gameObject.SetActive(true);
         }
-        else
+        else if (masterOrSlave == "Master")
         {
             videoManagerReceiver.enabled = false;
+            arduinoCommunicationReceiver.gameObject.SetActive(false);
+            videoManagerSender.enabled = true;
             arduinoCommunicationSender.gameObject.SetActive(true);
         }
     }
