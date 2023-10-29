@@ -37,6 +37,8 @@ public class VideoManagerSender : MonoBehaviour
         isPlaying = false;
 
         Debug.Log("Master Delay: " + masterDelay);
+        totalCount = int.Parse(loadedData.VideoSettings.CountPlayed);
+        controlSound = bool.Parse(loadedData.VideoSettings.SoundControl);
 
         countPlayed = totalCount;
         player.SetDirectAudioMute(0, false);

@@ -27,6 +27,9 @@ public class ProgramSetup : MonoBehaviour
     public InputField videoSizeH;
     public InputField pivotX;
     public InputField pivotY;
+    public InputField soundControl;
+    public InputField countPlayed;
+
 
     public void SaveSettings()
     {
@@ -52,6 +55,8 @@ public class ProgramSetup : MonoBehaviour
         videoSettings.Pivot = new string[2];
         videoSettings.Pivot[0] = (pivotX.text == "") ? "0" : pivotX.text;
         videoSettings.Pivot[1] = (pivotY.text == "") ? "0" : pivotY.text;
+        videoSettings.SoundControl = (soundControl.text == "") ? "false" : soundControl.text;
+        videoSettings.CountPlayed = (countPlayed.text == "") ? "3" : countPlayed.text;
         displaySetup.VideoSettings= videoSettings;
 
         if (arduinoCommunicationReceiver.serialPort != null)

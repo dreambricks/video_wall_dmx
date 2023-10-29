@@ -24,6 +24,8 @@ public class SetupUI : MonoBehaviour
     public InputField videoSizeH;
     public InputField pivotX;
     public InputField pivotY;
+    public InputField soundControl;
+    public InputField countPlayed;
 
 
     // Start is called before the first frame update
@@ -54,6 +56,9 @@ public class SetupUI : MonoBehaviour
 
         pivotX.text = loadedData.VideoSettings.Pivot[0];
         pivotY.text = loadedData.VideoSettings.Pivot[1];
+
+        soundControl.text = loadedData.VideoSettings.SoundControl;
+        countPlayed.text = loadedData.VideoSettings.CountPlayed;
     }
 
     private T LoadFromJsonFile<T>(string fileName)
