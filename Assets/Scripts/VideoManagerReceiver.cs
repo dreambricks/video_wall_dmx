@@ -31,6 +31,14 @@ public class VideoManagerReceiver : MonoBehaviour
             {
                 arduinoCommunicationReceiver.GetLastestData();
                 player.time = 0;
+                player.SetDirectAudioMute(0, false);
+                player.Play();
+            }
+            else
+            {
+                arduinoCommunicationReceiver.GetLastestData();
+                player.time = 0;
+                player.SetDirectAudioMute(0, true);
                 player.Play();
             }
         }

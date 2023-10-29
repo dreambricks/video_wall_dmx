@@ -13,6 +13,10 @@ public class VideoManagerSender : MonoBehaviour
     private bool isMessageSent;
     private bool isPlaying;
     private bool prevIsPlaying;
+
+    public int totalCount;
+    public int countPlayed;
+    public bool controlSound;
     
     DateTime timePassed;
     DateTime playStartTime;
@@ -33,7 +37,11 @@ public class VideoManagerSender : MonoBehaviour
         isPlaying = false;
 
         Debug.Log("Master Delay: " + masterDelay);
-        
+
+        countPlayed = totalCount;
+        player.SetDirectAudioMute(0, false);
+
+
     }
 
     // Update is called once per frame
@@ -48,19 +56,48 @@ public class VideoManagerSender : MonoBehaviour
 
         if (!isMessageSent && player.isPlaying == false && isPlaying == false)
         {
-            arduinoCommunicationSender.SendMessageToSlaves("1");
-            timePassed = DateTime.Now;
-            isMessageSent = true;
+            if (countPlayed != 0 && controlSound == true)
+            {
+                arduinoCommunicationSender.SendMessageToSlaves("2");
+                timePassed = DateTime.Now;
+                isMessageSent = true;
 
-            Debug.Log("Enviou a mensagem: " + player.isPlaying);
+                Debug.Log("Enviou a mensagem: " + player.isPlaying);
+                Debug.Log("Playing without sound");
+            }
+            else
+            {
+                arduinoCommunicationSender.SendMessageToSlaves("1");
+                timePassed = DateTime.Now;
+                isMessageSent = true;
+
+                Debug.Log("Enviou a mensagem: " + player.isPlaying);
+                Debug.Log("Playing with sound");
+
+            }
+
         }
 
         if ((DateTime.Now - timePassed).TotalSeconds >= masterDelay && isMessageSent && !isPlaying )
         {
-            player.Play();
-            isMessageSent=false;
-            isPlaying = true;
-            Debug.Log("Play: " + player.isPlaying); 
+            if (countPlayed != 0 && controlSound == true)
+            {
+                player.SetDirectAudioMute(0, true);
+                player.Play();
+                isMessageSent = false;
+                isPlaying = true;
+                Debug.Log("Play: " + player.isPlaying);
+                countPlayed--;
+            }
+            else
+            {
+                player.SetDirectAudioMute(0, false);
+                player.Play();
+                isMessageSent = false;
+                isPlaying = true;
+                Debug.Log("Play: " + player.isPlaying);
+                countPlayed = totalCount;
+            }
         }
 
         if (player.isPlaying == false && prevIsPlaying == true)
